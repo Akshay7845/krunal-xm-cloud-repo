@@ -1,6 +1,6 @@
 import { Image, Link, Text, RichText } from '@sitecore-jss/sitecore-jss-nextjs';
 
-const HeroCard = (props) => {
+const HeroCard = (props:any) => {
   const { Title, Description, Image: ImgField, CTALabel, CTALink } = props.fields || {};
 
   return (
@@ -23,7 +23,6 @@ const HeroCard = (props) => {
         <RichText field={Description} />  
       </div>
        
-      
       <Link field={CTALink}>
         <button style={{ 
           padding: '10px 20px', 
