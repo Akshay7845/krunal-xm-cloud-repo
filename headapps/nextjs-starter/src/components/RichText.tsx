@@ -2,12 +2,12 @@ import { JSX, useEffect, useState } from 'react';
 import { Field, RichText as JssRichText } from '@sitecore-jss/sitecore-jss-nextjs';
 
 interface Fields {
-  Text: Field<string>;
+  Text?: Field<string>; // Made optional to be safe
 }
 
 export type RichTextProps = {
   params: { [key: string]: string };
-  fields: Fields;
+  fields?: Fields; // fields optional for safety
 };
 
 interface Post {
@@ -20,7 +20,6 @@ export const Default = (props: RichTextProps): JSX.Element => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Example API call - using jsonplaceholder test API
     fetch('https://jsonplaceholder.typicode.com/posts?_limit=5')
       .then((res) => res.json())
       .then((data) => {
@@ -33,21 +32,18 @@ export const Default = (props: RichTextProps): JSX.Element => {
       });
   }, []);
 
-  const text = props.fields ? (
+  const text = props.fields?.Text ? (
     <JssRichText field={props.fields.Text} />
   ) : (
     <span className="is-empty-hint">Rich text</span>
   );
-  const id = props.params.RenderingIdentifier;
+
+  const id = props.params?.RenderingIdentifier || undefined;
+  const styles = props.params?.styles?.trimEnd() || '';
 
   return (
-    <div
-      className={`component rich-text ${props?.params?.styles?.trimEnd() || ''}`}
-      id={id ? id : undefined}
-    >
+    <div className={`component rich-text ${styles}`} id={id}>
       <div className="component-content">{text}</div>
-
-      { //API Data
       <div className="api-data">
         <h3>Sample API Data:</h3>
         {loading ? (
@@ -59,7 +55,7 @@ export const Default = (props: RichTextProps): JSX.Element => {
             ))}
           </ul>
         )}
-      </div>}
+      </div>
     </div>
   );
 };
