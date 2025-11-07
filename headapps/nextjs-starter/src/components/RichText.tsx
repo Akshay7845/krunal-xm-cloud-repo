@@ -44,18 +44,6 @@ export const Default = (props: RichTextProps): JSX.Element => {
   return (
     <div className={`component rich-text ${styles}`} id={id}>
       <div className="component-content">{text}</div>
-      <div className="api-data">
-        <h3>Sample API Data:</h3>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <ul>
-            {posts.map((post) => (
-              <li key={post.id}>{post.title}</li>
-            ))}
-          </ul>
-        )}
-      </div>
     </div>
   );
 };
