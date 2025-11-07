@@ -10,28 +10,7 @@ export type RichTextProps = {
   fields?: Fields; // fields optional for safety
 };
 
-interface Post {
-  id: number;
-  title: string;
-}
-
 export const Default = (props: RichTextProps): JSX.Element => {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts?_limit=5')
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error('Error fetching data:', err);
-        setLoading(false);
-      });
-  }, []);
-
   const text = props.fields?.Text ? (
     <JssRichText field={props.fields.Text} />
   ) : (
@@ -44,18 +23,6 @@ export const Default = (props: RichTextProps): JSX.Element => {
   return (
     <div className={`component rich-text ${styles}`} id={id}>
       <div className="component-content">{text}</div>
-      <div className="api-data">
-        <h3>Sample API Data:</h3>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <ul>
-            {posts.map((post) => (
-              <li key={post.id}>{post.title}</li>
-            ))}
-          </ul>
-        )}
-      </div>
     </div>
   );
 };
