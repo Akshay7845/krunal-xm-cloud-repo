@@ -47,7 +47,7 @@ export const Default = (props: RichTextProps): JSX.Element => {
     >
       <div className="component-content">{text}</div>
 
-      {/* API Data
+      { //API Data
       <div className="api-data">
         <h3>Sample API Data:</h3>
         {loading ? (
@@ -59,7 +59,7 @@ export const Default = (props: RichTextProps): JSX.Element => {
             ))}
           </ul>
         )}
-      </div> */}
+      </div>}
     </div>
   );
 };
