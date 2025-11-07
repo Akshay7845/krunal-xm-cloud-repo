@@ -1,13 +1,13 @@
-import { JSX, useEffect, useState } from 'react';
+import { JSX } from 'react';
 import { Field, RichText as JssRichText } from '@sitecore-jss/sitecore-jss-nextjs';
 
 interface Fields {
-  Text?: Field<string>; // Made optional to be safe
+  Text?: Field<string>; // Optional safe type
 }
 
 export type RichTextProps = {
   params: { [key: string]: string };
-  fields?: Fields; // fields optional for safety
+  fields?: Fields; // optional fields for safety
 };
 
 export const Default = (props: RichTextProps): JSX.Element => {
