@@ -40,4 +40,6 @@ const HeroCard = (props) => {
   );
 };
 
+
+
 export default HeroCard;
