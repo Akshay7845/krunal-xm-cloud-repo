@@ -1,37 +1,16 @@
-import { JSX, useEffect, useState } from 'react';
+import { JSX } from 'react';
 import { Field, RichText as JssRichText } from '@sitecore-jss/sitecore-jss-nextjs';
 
 interface Fields {
-  Text?: Field<string>; // Made optional to be safe
+  Text?: Field<string>; // Optional safe type
 }
 
 export type RichTextProps = {
   params: { [key: string]: string };
-  fields?: Fields; // fields optional for safety
+  fields?: Fields; // optional fields for safety
 };
 
-interface Post {
-  id: number;
-  title: string;
-}
-
 export const Default = (props: RichTextProps): JSX.Element => {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts?_limit=5')
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error('Error fetching data:', err);
-        setLoading(false);
-      });
-  }, []);
-
   const text = props.fields?.Text ? (
     <JssRichText field={props.fields.Text} />
   ) : (
